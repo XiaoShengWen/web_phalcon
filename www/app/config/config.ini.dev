@@ -1,0 +1,18 @@
+[mongodb]          
+host = "127.0.0.1:27017"
+username = "root"
+password = "123456" 
+database = "wall-breaker"
+   
+[application]      
+controllersDir = /app/controllers/
+modelsDir = /app/models/
+viewsDir = /app/views/
+pluginsDir = /app/plugins/
+formsDir = /app/forms/
+libraryDir = /app/library/
+baseUri = /        
+ 
+[volt]
+compiledPath = /tmp/volt
+compileAlways = true

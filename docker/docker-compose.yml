@@ -1,0 +1,34 @@
+version: '2'
+services:
+  fpm:
+    environment:
+      - DEBUG=true
+    image: wzy.cloud/php-phalcon 
+    container_name: fpm-wallbreaker-${DEV_USER}
+    volumes:
+      # 挂载项目代码目录
+      - ../www:/var/www/html/www
+    expose:
+      - "9000"
+
+  nginx:
+    image: wzy.cloud/library/nginx:1.9.8
+    container_name: nginx-wallbreaker-${DEV_USER}
+    volumes:
+      # 加载项目nginx配置
+      - ./nginx.conf:/etc/nginx/conf.d/php.conf:ro
+      # 挂载项目代码目录
+      - ../www:/var/www/html/www:ro
+    links:
+      # 关联容器, 在该容器中可以通过 `fpm.localhost` 域名访问另一个容器的端口
+      - fpm:fpm.localhost
+    ports:
+      - "${DEV_PORT}:8000"
+
+  mongo:
+    image: wzy.cloud/library/mongo:3.2
+    container_name: mongo-wallbreaker-${DEV_USER}
+    volumes: 
+      - ../mongodb:/data/db
+    ports:
+      - "27017:27017"
