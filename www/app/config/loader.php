@@ -1,4 +1,5 @@
 <?php
+// 加载composer的插件
 require_once(APP_PATH . "/vendor/autoload.php");
  
 $loader = new Phalcon\Loader();
