@@ -29,12 +29,5 @@ require APP_PATH . '/app/config/services.php';
 
 
 $application = new Application($di);
-$application->registerModules([
-    'backend'  => array(
-        'className' => 'backend\Module',
-        'path' => APP_PATH . '/app/modules/backend/Module.php',
-    )
-]);
-
 echo $application->handle()->getContent();
 

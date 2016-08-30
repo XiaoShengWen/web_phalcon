@@ -36,6 +36,7 @@ if (!($di instanceof Phalcon\Di\FactoryDefault\Cli)) {
                 'action'     => 2,
             )
         );
+
         $router->add(
             '/admin/:controller/:action/:params',
             array(
@@ -54,7 +55,6 @@ if (!($di instanceof Phalcon\Di\FactoryDefault\Cli)) {
     $di->set('dispatcher', function () use ($di) {
         $eventsManager = new Events\Manager();
         
-        // $eventsManager->attach('dispatch:beforeExecuteRoute', new AuthPlugin());
         $eventsManager->attach("dispatch:beforeException", function ($event, $dispatcher, $exception) {
             // Handle 404 exceptions
             if ($exception instanceof Dispatcher\Exception) {
